@@ -10,46 +10,51 @@
 <body>
 
     <!-- Header Section -->
-    <header>
+    <header class="page-header">
         <h1>Subscription Tracker</h1>
         <p>Manage and keep track of your subscriptions.</p>
     </header>
 
-    <main>
+    <main class="container">
 
         <!-- Add Subscription Section -->
-        <section id="subscription-form-section">
-            <h2>Add a Subscription</h2>
+        <section id="subscription-form-section" class="section">
+            <h2 class="section-title">Add a Subscription</h2>
 
-            <form id="subscription-form">
+            <form id="subscription-form" class="form-grid">
 
-                <div>
+                <div class="form-group">
                     <label for="service">Service:</label>
                     <input type="text" id="service" name="service"
+                           class="form-control"
                            placeholder="e.g. Netflix" required>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="provider">Provider:</label>
                     <input type="text" id="provider" name="provider"
+                           class="form-control"
                            placeholder="e.g. Netflix Inc." required>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="subscriber">Subscriber:</label>
                     <input type="text" id="subscriber" name="subscriber"
+                           class="form-control"
                            placeholder="e.g. John Smith" required>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="renewal-date">Renewal Date:</label>
                     <input type="date" id="renewal-date"
-                           name="renewal-date" required>
+                           name="renewal-date"
+                           class="form-control" required>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="category">Category:</label>
-                    <select id="category" name="category" required>
+                    <select id="category" name="category"
+                            class="form-control" required>
                         <option value="">Select a category</option>
                         <option value="Entertainment">Entertainment</option>
                         <option value="Music">Music</option>
@@ -59,46 +64,56 @@
                     </select>
                 </div>
 
-                <button type="submit">Add Subscription</button>
+                <div class="form-group">
+                    <button type="submit" class="button button-primary">
+                        Add Subscription
+                    </button>
+                </div>
 
             </form>
         </section>
 
         <!-- Subscription Table Section -->
-        <section id="subscriptions-section">
-            <h2>My Subscriptions</h2>
+        <section id="subscriptions-section" class="section">
+            <h2 class="section-title">My Subscriptions</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Service</th>
-                        <th>Provider</th>
-                        <th>Subscriber</th>
-                        <th>Renewal Date</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Provider</th>
+                            <th>Subscriber</th>
+                            <th>Renewal Date</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
 
-                <tbody id="subscription-list">
-                    <!-- JavaScript will add subscriptions here -->
-                </tbody>
-            </table>
+                    <tbody id="subscription-list">
+                        <!-- JavaScript will add subscriptions here -->
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- Summary Section -->
-        <section id="summary-section">
-            <h2>Subscription Summary</h2>
+        <section id="summary-section" class="section">
+            <h2 class="section-title">Subscription Summary</h2>
 
-            <div>
-                <h3>Total Subscriptions</h3>
-                <p id="total-subscriptions">0</p>
-            </div>
+            <div class="summary-grid">
 
-            <div>
-                <h3>Expired Subscriptions</h3>
-                <p id="expired-subscriptions">0</p>
+                <div class="summary-card">
+                    <h3>Total Subscriptions</h3>
+                    <p id="total-subscriptions" class="summary-number">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Expired Subscriptions</h3>
+                    <p id="expired-subscriptions" class="summary-number">0</p>
+                </div>
+
             </div>
         </section>
 
