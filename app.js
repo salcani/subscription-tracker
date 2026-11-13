@@ -47,7 +47,7 @@ function displaySubscriptions() {
     subscriptionList.innerHTML = "";
 
     // Loop through subscriptions
-    subscriptions.forEach(function(subscription) {
+    subscriptions.forEach(function(subscription, index) {
 
         const row = createElement("tr");
 
@@ -58,7 +58,19 @@ function displaySubscriptions() {
         row.appendChild(createTableCell(formatDate(subscription.renewalDate)));
         row.appendChild(createTableCell(subscription.category));
         row.appendChild(createTableCell(getSubscriptionStatus(subscription.renewalDate)));
-        row.appendChild(createTableCell("-"));
+
+        // Create Delete button
+        const actionCell = createElement("td");
+        const deleteButton = createButton("Delete", "button button-danger");
+
+        // Delete subscription when clicked
+        deleteButton.addEventListener("click", function() {
+            subscriptions.splice(index, 1);
+            displaySubscriptions();
+        });
+
+        actionCell.appendChild(deleteButton);
+        row.appendChild(actionCell);
 
         // Add row to the table
         subscriptionList.appendChild(row);
