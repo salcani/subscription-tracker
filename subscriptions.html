@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Tracker - Subscriptions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>Subscription Tracker</h1>
+        <p>Manage and keep track of your subscriptions.</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="add.html">Add</a>
+        <a href="subscriptions.html" class="active">Subscriptions</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- Subscription Table Section -->
+        <section class="section">
+            <h2 class="section-title">My Subscriptions</h2>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Provider</th>
+                            <th>Subscriber</th>
+                            <th>Renewal Date</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="subscription-list">
+                        <!-- JavaScript adds subscriptions here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="section">
+            <h2 class="section-title">Subscription Summary</h2>
+
+            <div class="summary-grid">
+
+                <div class="summary-card">
+                    <h3>Total Subscriptions</h3>
+                    <p id="total-subscriptions" class="summary-number">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Expired Subscriptions</h3>
+                    <p id="expired-subscriptions" class="summary-number">0</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js-library.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>

@@ -1,57 +1,69 @@
 
-// Get the form and subscription table
-const subscriptionForm = getElement("subscription-form");
-const subscriptionList = getElement("subscription-list");
-
-// Load saved subscriptions from Local Storage
+// Get subscriptions from Local Storage
 let subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
 
 
-// Add a new subscription
-subscriptionForm.addEventListener("submit", function(event) {
+// =================================
+// 1. SAVE SUBSCRIPTIONS
+// =================================
 
-    event.preventDefault();
-
-    // Get values from the form
-    const service = getElement("service").value.trim();
-    const provider = getElement("provider").value.trim();
-    const subscriber = getElement("subscriber").value.trim();
-    const renewalDate = getElement("renewal-date").value;
-    const category = getElement("category").value;
-
-    // Create a subscription object
-    const subscription = {
-        service: service,
-        provider: provider,
-        subscriber: subscriber,
-        renewalDate: renewalDate,
-        category: category
-    };
-
-    // Add subscription to the array
-    subscriptions.push(subscription);
-
-    // Save and update the application
-    saveSubscriptions();
-    displaySubscriptions();
-    updateSummary();
-
-    // Clear the form
-    subscriptionForm.reset();
-
-});
-
-
-// Save subscriptions in Local Storage
 function saveSubscriptions() {
-
     localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
+}
+
+
+// =================================
+// 2. ADD SUBSCRIPTION
+// =================================
+
+const subscriptionForm = getElement("subscription-form");
+
+if (subscriptionForm) {
+
+    subscriptionForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const service = getElement("service").value.trim();
+        const provider = getElement("provider").value.trim();
+        const subscriber = getElement("subscriber").value.trim();
+        const renewalDate = getElement("renewal-date").value;
+        const category = getElement("category").value;
+
+        const subscription = {
+            service: service,
+            provider: provider,
+            subscriber: subscriber,
+            renewalDate: renewalDate,
+            category: category
+        };
+
+        subscriptions.push(subscription);
+
+        saveSubscriptions();
+
+        subscriptionForm.reset();
+
+        alert("Subscription added successfully!");
+
+        window.location.href = "subscriptions.html";
+
+    });
 
 }
 
 
-// Display subscriptions in the table
+// =================================
+// 3. DISPLAY SUBSCRIPTIONS
+// =================================
+
 function displaySubscriptions() {
+
+    const subscriptionList = getElement("subscription-list");
+
+    if (!subscriptionList) {
+        return;
+    }
 
     subscriptionList.innerHTML = "";
 
@@ -68,19 +80,26 @@ function displaySubscriptions() {
 
         // Create Delete button
         const actionCell = createElement("td");
-        const deleteButton = createButton("Delete", "button button-danger");
+
+        const deleteButton = createButton(
+            "Delete",
+            "button button-danger"
+        );
 
         deleteButton.addEventListener("click", function() {
 
             subscriptions.splice(index, 1);
 
             saveSubscriptions();
+
             displaySubscriptions();
+
             updateSummary();
 
         });
 
         actionCell.appendChild(deleteButton);
+
         row.appendChild(actionCell);
 
         subscriptionList.appendChild(row);
@@ -90,8 +109,14 @@ function displaySubscriptions() {
 }
 
 
-// Update subscription statistics
+// =================================
+// 4. UPDATE SUMMARY
+// =================================
+
 function updateSummary() {
+
+    const totalElement = getElement("total-subscriptions");
+    const expiredElement = getElement("expired-subscriptions");
 
     const total = subscriptions.length;
 
@@ -105,12 +130,20 @@ function updateSummary() {
 
     });
 
-    getElement("total-subscriptions").textContent = total;
-    getElement("expired-subscriptions").textContent = expired;
+    if (totalElement) {
+        totalElement.textContent = total;
+    }
+
+    if (expiredElement) {
+        expiredElement.textContent = expired;
+    }
 
 }
 
 
-// Load and display saved subscriptions when the page opens
+// =================================
+// 5. INITIALIZE PAGE
+// =================================
+
 displaySubscriptions();
 updateSummary();

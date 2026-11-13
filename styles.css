@@ -193,3 +193,47 @@ h1, h2, h3, p {
         padding: var(--medium-spacing);
     }
 }
+
+/* =================================
+   9. NAVIGATION MENU
+================================= */
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 16px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+}
+
+.main-nav a:hover {
+    background-color: var(--secondary-color);
+}
+
+.main-nav a.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.home-links {
+    display: flex;
+    gap: var(--medium-spacing);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+}
+
