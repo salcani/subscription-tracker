@@ -1,0 +1,195 @@
+
+/* =================================
+   1. CSS VARIABLES
+================================= */
+
+:root {
+    --primary-color: #3157A4;
+    --secondary-color: #E8EEF8;
+    --text-color: #263247;
+    --border-color: #D5DCE8;
+    --white: #FFFFFF;
+    --background-color: #F5F7FA;
+    --danger-color: #D9534F;
+
+    --small-spacing: 8px;
+    --medium-spacing: 16px;
+    --large-spacing: 24px;
+
+    --border-radius: 8px;
+}
+
+
+/* =================================
+   2. GENERAL STYLES
+================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+h1, h2, h3, p {
+    margin-top: 0;
+}
+
+
+/* =================================
+   3. REUSABLE LAYOUT CLASSES
+================================= */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    padding: var(--large-spacing);
+    background-color: var(--white);
+}
+
+.section {
+    background-color: var(--white);
+    padding: var(--large-spacing);
+    margin-top: var(--large-spacing);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.section-title {
+    margin-bottom: var(--large-spacing);
+}
+
+
+/* =================================
+   4. FORM LIBRARY
+================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--medium-spacing);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--small-spacing);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+
+/* =================================
+   5. BUTTON LIBRARY
+================================= */
+
+.button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.button-danger {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.button:hover {
+    opacity: 0.85;
+}
+
+
+/* =================================
+   6. TABLE LIBRARY
+================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.data-table th {
+    background-color: var(--secondary-color);
+}
+
+.data-table tr:hover {
+    background-color: var(--background-color);
+}
+
+
+/* =================================
+   7. SUMMARY CARD LIBRARY
+================================= */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--medium-spacing);
+}
+
+.summary-card {
+    padding: var(--large-spacing);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.summary-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+/* =================================
+   8. RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 600px) {
+    .form-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: var(--medium-spacing);
+    }
+}
