@@ -31,8 +31,9 @@ subscriptionForm.addEventListener("submit", function(event) {
     // Add subscription to the array
     subscriptions.push(subscription);
 
-    // Update the table
+    // Update table and summary
     displaySubscriptions();
+    updateSummary();
 
     // Clear the form
     subscriptionForm.reset();
@@ -43,15 +44,12 @@ subscriptionForm.addEventListener("submit", function(event) {
 // Display subscriptions in the table
 function displaySubscriptions() {
 
-    // Clear previous table rows
     subscriptionList.innerHTML = "";
 
-    // Loop through subscriptions
     subscriptions.forEach(function(subscription, index) {
 
         const row = createElement("tr");
 
-        // Create table cells
         row.appendChild(createTableCell(subscription.service));
         row.appendChild(createTableCell(subscription.provider));
         row.appendChild(createTableCell(subscription.subscriber));
@@ -63,18 +61,45 @@ function displaySubscriptions() {
         const actionCell = createElement("td");
         const deleteButton = createButton("Delete", "button button-danger");
 
-        // Delete subscription when clicked
         deleteButton.addEventListener("click", function() {
+
             subscriptions.splice(index, 1);
+
             displaySubscriptions();
+            updateSummary();
+
         });
 
         actionCell.appendChild(deleteButton);
         row.appendChild(actionCell);
 
-        // Add row to the table
         subscriptionList.appendChild(row);
 
     });
 
 }
+
+
+// Update subscription statistics
+function updateSummary() {
+
+    // Calculate total subscriptions
+    const total = subscriptions.length;
+
+    // Count expired subscriptions
+    let expired = 0;
+
+    subscriptions.forEach(function(subscription) {
+
+        if (getSubscriptionStatus(subscription.renewalDate) === "Expired") {
+            expired++;
+        }
+
+    });
+
+    // Display the results
+    getElement("total-subscriptions").textContent = total;
+    getElement("expired-subscriptions").textContent = expired;
+
+}
+
