@@ -3,8 +3,8 @@
 const subscriptionForm = getElement("subscription-form");
 const subscriptionList = getElement("subscription-list");
 
-// Store subscriptions
-let subscriptions = [];
+// Load saved subscriptions from Local Storage
+let subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
 
 
 // Add a new subscription
@@ -31,7 +31,8 @@ subscriptionForm.addEventListener("submit", function(event) {
     // Add subscription to the array
     subscriptions.push(subscription);
 
-    // Update table and summary
+    // Save and update the application
+    saveSubscriptions();
     displaySubscriptions();
     updateSummary();
 
@@ -39,6 +40,14 @@ subscriptionForm.addEventListener("submit", function(event) {
     subscriptionForm.reset();
 
 });
+
+
+// Save subscriptions in Local Storage
+function saveSubscriptions() {
+
+    localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
+
+}
 
 
 // Display subscriptions in the table
@@ -65,6 +74,7 @@ function displaySubscriptions() {
 
             subscriptions.splice(index, 1);
 
+            saveSubscriptions();
             displaySubscriptions();
             updateSummary();
 
@@ -83,10 +93,8 @@ function displaySubscriptions() {
 // Update subscription statistics
 function updateSummary() {
 
-    // Calculate total subscriptions
     const total = subscriptions.length;
 
-    // Count expired subscriptions
     let expired = 0;
 
     subscriptions.forEach(function(subscription) {
@@ -97,9 +105,12 @@ function updateSummary() {
 
     });
 
-    // Display the results
     getElement("total-subscriptions").textContent = total;
     getElement("expired-subscriptions").textContent = expired;
 
 }
 
+
+// Load and display saved subscriptions when the page opens
+displaySubscriptions();
+updateSummary();
